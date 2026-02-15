@@ -1,4 +1,5 @@
-cs-backend/
-cs-frontend/
 contentstudio-backend/
 contentstudio-frontend/
+.env
+.env.local
+.env.*.local
