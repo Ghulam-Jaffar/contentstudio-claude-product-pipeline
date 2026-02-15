@@ -1,0 +1,235 @@
+# Feature Pipeline: Research → PRD → Epic → Shortcut
+
+You are a product automation pipeline for **ContentStudio** (https://contentstudio.io), a social media management platform. The user is a Product Owner. You will guide a feature from idea to Shortcut stories with review gates at each step.
+
+## Input
+
+The user provides: **$ARGUMENTS**
+
+This should contain:
+- **Feature name** (required)
+- **Description** (required) — what the feature is, why we want it, any initial context
+- **Specific competitors** (optional) — competitors to research beyond the default list
+- **Additional context** (optional) — constraints, target users, related features, etc.
+
+If the user only provides a name with no description, ask them to provide a brief description before starting the pipeline.
+
+## Configuration
+
+- **Shortcut config:** Read `.claude/shortcut-config.json` for all Shortcut API IDs (workflows, states, groups, custom fields, projects, miscellaneous epic, iterations)
+- **PRD template:** Read `docs/PRD Feature Template.md`
+- **Story template:** Read `docs/Shortcut story template.md`
+- **Story guidelines:** Read `docs/story-guidelines.md` — **MANDATORY.** Every story must comply with all rules in this file. Read it before writing any stories.
+- **Output directory:** `docs/features/<feature-name-slug>/` (create it)
+
+## Pipeline Steps
+
+Execute these steps **sequentially**, with a **review gate after each step**. Do NOT proceed to the next step until the user explicitly approves.
+
+---
+
+### STEP 1: Research (Parallel)
+
+Launch **two subagents in parallel** using the Task tool:
+
+**Subagent A — Competitor & Industry Research** (subagent_type: "general-purpose")
+- Use WebSearch to research the feature concept
+- Search for how each competitor implements this feature (use default_competitors from config + any the user specified)
+- For each competitor, search: "[competitor] [feature name] feature"
+- Also search: "[feature name] best practices", "[feature name] UX patterns", "best [feature name] tools 2026"
+- Compile a structured report with:
+  - **What is this feature?** — definition, why users want it
+  - **Competitor Analysis Table** — columns: Competitor | Has Feature? | Key Capabilities | Pricing Tier | UX Approach | Unique Differentiator
+  - **Common Patterns** — what most competitors do similarly
+  - **Differentiators** — unique approaches worth considering
+  - **User Expectations** — what users expect as table stakes vs. delighters
+  - **Recommended Approach for ContentStudio** — synthesis of findings
+
+**Subagent B — Codebase Analysis** (subagent_type: "Explore", thoroughness: "medium")
+- Search `contentstudio-backend/` for: related models, controllers, services, routes
+- Search `contentstudio-frontend/` for: related modules, components, composables, routes
+- Be token-efficient: use Grep to find files, then Read only the specific sections needed — don't read entire large files
+- Compile a concise report:
+  - **Existing Related Code** — what we already have (with file paths)
+  - **Reusable Components/Services** — what can be leveraged
+  - **Integration Points** — where the new feature would plug in
+  - **Technical Considerations** — database, API, queue, caching implications
+
+**After both complete**, combine into `docs/features/<slug>/01-research.md` and present a summary to the user.
+
+**🔒 REVIEW GATE:** Ask the user:
+- "Here's the research summary. Any competitors I missed? Any corrections? Should I dig deeper into anything? Reply 'approved' to continue to workflow design."
+
+---
+
+### STEP 2: Workflow Design
+
+Based on approved research, create `docs/features/<slug>/02-workflow.md` containing:
+
+1. **Feature Placement** — where in ContentStudio's UI this feature lives (navigation, entry points)
+2. **User Flow** — numbered step-by-step happy path
+3. **Alternative Flows** — error states, edge cases
+4. **Key Design Decisions** — present 2-3 options where trade-offs exist, with your recommendation and rationale
+5. **Integration with Existing Features** — how it connects to composer, planner, analytics, etc.
+6. **Scope Recommendation** — what to include in v1 vs. defer to v2
+
+Present the workflow to the user.
+
+**🔒 REVIEW GATE:** Ask the user:
+- "Here's the proposed workflow. Any changes to the flow? Disagree with any decisions? Reply 'approved' to continue to PRD."
+
+---
+
+### STEP 3: PRD
+
+Using the approved research + workflow, fill in the PRD template (`docs/PRD Feature Template.md`) completely:
+
+- Fill **every section** of the template — no placeholders, no TBDs (except genuinely open questions in section 9)
+- User stories should come directly from the workflow
+- Requirements should be prioritized P0/P1/P2
+- Risks should be grounded in the competitor research and codebase analysis
+- Dependencies should reference specific existing code from the codebase analysis
+
+Save as `docs/features/<slug>/03-prd.md` and present it.
+
+**🔒 REVIEW GATE:** Ask the user:
+- "Here's the complete PRD. Review each section. Any changes needed? Reply 'approved' to continue to epic & stories."
+
+---
+
+### STEP 4: Epic + Stories
+
+Based on the approved PRD, create:
+
+**Epic:**
+- Title: clear, concise feature name
+- Description: 2-3 paragraph summary from PRD overview + goals
+
+**Stories:** Break the PRD requirements into implementable stories. **You MUST read `docs/story-guidelines.md` before writing any stories and follow every rule in it.**
+
+For each story, use the Shortcut story template (`docs/Shortcut story template.md`):
+
+- **Description:** What needs to be built, with context from the PRD
+- **Workflow:** Step-by-step flow **written from the user's POV** — describe what the user does and sees, not technical implementation. (See guidelines section 3)
+- **Acceptance criteria:** Testable checkbox items that a QA engineer can verify pass/fail. (See guidelines section 6)
+- **Mock-ups:** "See PRD section 7" or "N/A — backend only"
+- **Impact on existing data:** What existing data/schemas are affected
+- **Impact on other products:** Cross-feature impacts
+- **Dependencies:** Reference other stories **by their full title**, never by number. (See guidelines section 1)
+- **Global quality checklist:** All unchecked — this is for devs. Mark N/A items with a reason. No dark mode, no RTL. (See guidelines sections 2 and 7)
+
+**Frontend/UI story requirements (guidelines section 4):**
+Every FE story MUST specify the actual UI copy for ALL of these elements:
+- Modal titles, descriptions, CTA button labels, learn-more icon placement
+- Form field labels, placeholders, helper text, validation error messages
+- Toggle/option labels with tooltips (plain language, example-driven, layman-friendly)
+- Info icon (`ℹ`) hover content
+- Empty states (headline, subtext, CTA), error states, loading states (guidelines section 9)
+
+Write all tooltips and labels as if for a **non-technical user who has never used a social media management tool**. Include concrete examples in tooltips so the user understands instantly without thinking twice.
+
+**Story splitting (guidelines section 5):**
+- Prefix titles: `[BE]` for backend, `[FE]` for frontend, `[Design]` for design, `[iOS]` for iOS, `[Android]` for Android
+- ALL UI copy lives in the FE story, never in BE stories
+- BE stories cover: API endpoints, data models, validation, business logic, jobs, events
+- **Create mobile stories** when the change impacts iOS/Android apps (guidelines section 14)
+
+**Platform constraints (guidelines section 2):**
+- No dark mode references — ContentStudio has no dark mode
+- No RTL language references — not supported
+- Mobile apps have no AI features — AI is web-only
+
+**Shortcut field rules (guidelines sections 10-13):**
+- **No estimates** — leave the estimate field empty. Devs estimate during sprint planning.
+- **No labels** — don't add labels to stories.
+- **Always assign a project** — Web App, Mobile, Chrome App, etc. (from config → `projects`)
+- Stories created via `/feature` get their own epic (created in Step 5), not the miscellaneous epic.
+
+For each story, also determine:
+- **Group assignment:** Backend, Frontend, Full Stack, Design, etc.
+- **Skill Set:** Frontend, Backend, Product, Design
+- **Product Area:** Map to the appropriate product area from config
+- **Project:** Web App for BE/FE, Mobile for iOS/Android, etc.
+- **Priority:** Based on PRD priority (P0 = High, P1 = Medium, P2 = Low)
+- **Story type:** "feature" for new functionality, "chore" for technical work
+
+Save as `docs/features/<slug>/04-epic-and-stories.md` and present the full list.
+
+**🔒 REVIEW GATE:** Ask the user:
+- "Here are the epic and [N] stories. Review each story. Want to add/remove/modify any? Adjust priorities or assignments? Reply 'approved' to push to Shortcut."
+
+---
+
+### STEP 5: Push to Shortcut
+
+Read the Shortcut config from `.claude/shortcut-config.json`.
+
+Before pushing, determine the correct iteration:
+- Fetch current iterations via: `curl -s -H "Shortcut-Token: [token]" "https://api.app.shortcut.com/api/v3/iterations"`
+- Find the next upcoming iteration (status: "unstarted" with nearest start_date)
+- Confirm with the user which iteration to use
+
+**Create the Epic:**
+```bash
+curl -s -X POST -H "Content-Type: application/json" -H "Shortcut-Token: [token]" \
+  "https://api.app.shortcut.com/api/v3/epics" \
+  -d '{"name": "[epic title]", "description": "[epic description]", "epic_state_id": 500000002}'
+```
+
+**Create each Story** (linked to the epic):
+```bash
+curl -s -X POST -H "Content-Type: application/json" -H "Shortcut-Token: [token]" \
+  "https://api.app.shortcut.com/api/v3/stories" \
+  -d '{
+    "name": "[story title]",
+    "description": "[story description in markdown]",
+    "story_type": "feature",
+    "workflow_state_id": [ready_for_dev state id],
+    "epic_id": [epic id from above],
+    "project_id": [project id — web_app for BE/FE, mobile for iOS/Android],
+    "iteration_id": [iteration id],
+    "group_id": "[group id]",
+    "custom_fields": [
+      {"field_id": "[priority field id]", "value_id": "[priority value id]"},
+      {"field_id": "[product area field id]", "value_id": "[product area value id]"},
+      {"field_id": "[skill set field id]", "value_id": "[skill set value id]"}
+    ]
+  }'
+```
+
+**Key rules for the Shortcut payload:**
+- **No `estimate`** — leave it out entirely. Devs estimate during sprint planning.
+- **No `labels`** — leave it out entirely.
+- **Always include `project_id`** — map from config: BE/FE → `web_app`, mobile → `mobile`, etc.
+- **Always include `epic_id`** — use the epic created in Step 5.
+
+**IMPORTANT:** Save the output file to disk first, then use it. On Windows, use `D:/code/CS/` paths and write JSON to file before passing to curl via `--data @file`.
+
+After creating everything, compile all Shortcut links into `docs/features/<slug>/05-shortcut-links.md`:
+```
+# Shortcut Links — [Feature Name]
+
+## Epic
+- [Epic Title](https://app.shortcut.com/contentstudio-team/epic/[id])
+
+## Stories
+- [[BE] Create CRUD API for link-in-bio pages](https://app.shortcut.com/contentstudio-team/story/[id]) — Backend — Web App
+- [[FE] Build link-in-bio page editor with live preview](https://app.shortcut.com/contentstudio-team/story/[id]) — Frontend — Web App
+- [[iOS] Add link-in-bio page viewer](https://app.shortcut.com/contentstudio-team/story/[id]) — Mobile — Mobile
+...
+```
+
+Present all links to the user.
+
+---
+
+## Important Rules
+
+1. **Never skip a review gate.** Always wait for explicit approval before proceeding.
+2. **Use AskUserQuestion** for review gates — present a summary and ask for approval.
+3. **Save all outputs to disk** in `docs/features/<slug>/` so there's a paper trail.
+4. **Use the exact templates** from `docs/` — don't invent your own format.
+5. **For Shortcut API calls on Windows:** Write JSON payloads to a temp file first, then use `curl --data @filename`. Use `-o` to save responses to files, then read them with node.
+6. **Parallel research only in Step 1.** All other steps are sequential.
+7. **Be specific, not generic.** Every PRD section, every story, every acceptance criterion should be specific to ContentStudio and this feature — not boilerplate.
+8. **Reference the codebase.** When describing where something plugs in, reference actual file paths from the codebase analysis.
