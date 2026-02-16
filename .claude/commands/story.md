@@ -123,6 +123,20 @@ curl -s -X POST -H "Content-Type: application/json" -H "Shortcut-Token: [token]"
   }'
 ```
 
+**After creating each story, add the template checklist tasks.** The `story_template_id` field does NOT auto-create tasks via API — you must create them manually:
+```bash
+curl -s -X POST -H "Content-Type: application/json" -H "Shortcut-Token: [token]" \
+  "https://api.app.shortcut.com/api/v3/stories/[story_id]/tasks" \
+  -d '{"description": "[task description]", "complete": false}'
+```
+
+The "New Feature Template" includes these 5 checklist tasks (create all 5 for every story):
+1. `Mobile responsiveness tested (frontend only, N/A for backend-only stories)`
+2. `Multilingual support verified (frontend + backend, translations available or fallback handled)`
+3. `UI theming supported (default + white-label, design library components are being used)`
+4. `White-label domains impact reviewed`
+5. `Cross-product impact assessed (web, mobile apps, Chrome extension)`
+
 **Key rules for the Shortcut payload:**
 - **No `estimate`** — leave it out entirely
 - **No `labels`** — leave it out entirely
