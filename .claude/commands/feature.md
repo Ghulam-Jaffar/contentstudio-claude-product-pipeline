@@ -57,6 +57,14 @@ Launch **two subagents in parallel** using the Task tool:
 
 **After both complete**, combine into `docs/features/<slug>/01-research.md` and present a summary to the user.
 
+**Create a Shortcut Doc** for the research:
+```bash
+curl -s -X POST -H "Content-Type: application/json" -H "Shortcut-Token: [token]" \
+  "https://api.app.shortcut.com/api/v3/documents" \
+  -d '{"title": "[Feature Name] — Research", "content": "[full research markdown]", "content_format": "markdown"}'
+```
+Save the returned `id` (UUID) — it will be linked to the epic in Step 5.
+
 **🔒 REVIEW GATE:** Ask the user:
 - "Here's the research summary. Any competitors I missed? Any corrections? Should I dig deeper into anything? Reply 'approved' to continue to workflow design."
 
@@ -91,6 +99,14 @@ Using the approved research + workflow, fill in the PRD template (`docs/PRD Feat
 - Dependencies should reference specific existing code from the codebase analysis
 
 Save as `docs/features/<slug>/03-prd.md` and present it.
+
+**Create a Shortcut Doc** for the PRD:
+```bash
+curl -s -X POST -H "Content-Type: application/json" -H "Shortcut-Token: [token]" \
+  "https://api.app.shortcut.com/api/v3/documents" \
+  -d '{"title": "[Feature Name] — PRD", "content": "[full PRD markdown]", "content_format": "markdown"}'
+```
+Save the returned `id` (UUID) — it will be linked to the epic in Step 5.
 
 **🔒 REVIEW GATE:** Ask the user:
 - "Here's the complete PRD. Review each section. Any changes needed? Reply 'approved' to continue to epic & stories."
@@ -177,6 +193,20 @@ curl -s -X POST -H "Content-Type: application/json" -H "Shortcut-Token: [token]"
   -d '{"name": "[epic title]", "description": "[epic description]", "epic_state_id": 500000002}'
 ```
 
+**Link the Research and PRD docs to the Epic:**
+
+After creating the epic, link both Shortcut Docs (created in Steps 1 and 3) to the epic:
+```bash
+# Link Research doc
+curl -s -X PUT -H "Content-Type: application/json" -H "Shortcut-Token: [token]" \
+  "https://api.app.shortcut.com/api/v3/documents/[research_doc_id]/epics/[epic_id]"
+
+# Link PRD doc
+curl -s -X PUT -H "Content-Type: application/json" -H "Shortcut-Token: [token]" \
+  "https://api.app.shortcut.com/api/v3/documents/[prd_doc_id]/epics/[epic_id]"
+```
+These PUT requests return 204 No Content on success. The docs will appear in the epic's "Docs" section in Shortcut.
+
 **Create each Story** (linked to the epic):
 ```bash
 curl -s -X POST -H "Content-Type: application/json" -H "Shortcut-Token: [token]" \
@@ -228,6 +258,10 @@ After creating everything, compile all Shortcut links into `docs/features/<slug>
 ## Epic
 - [Epic Title](https://app.shortcut.com/contentstudio-team/epic/[id])
 
+## Docs (linked to epic)
+- [[Feature Name] — Research](https://app.shortcut.com/contentstudio-team/doc/[doc-id]) — Research & Competitor Analysis
+- [[Feature Name] — PRD](https://app.shortcut.com/contentstudio-team/doc/[doc-id]) — Product Requirements Document
+
 ## Stories
 - [[BE] Create CRUD API for link-in-bio pages](https://app.shortcut.com/contentstudio-team/story/[id]) — Backend — Web App
 - [[FE] Build link-in-bio page editor with live preview](https://app.shortcut.com/contentstudio-team/story/[id]) — Frontend — Web App
@@ -249,3 +283,4 @@ Present all links to the user.
 6. **Parallel research only in Step 1.** All other steps are sequential.
 7. **Be specific, not generic.** Every PRD section, every story, every acceptance criterion should be specific to ContentStudio and this feature — not boilerplate.
 8. **Reference the codebase.** When describing where something plugs in, reference actual file paths from the codebase analysis.
+9. **Create Shortcut Docs and link to epic.** The Research doc (Step 1) and PRD doc (Step 3) must be created as Shortcut Documents via the API and linked to the epic in Step 5. This keeps all feature context accessible directly from the epic in Shortcut.

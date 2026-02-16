@@ -9,7 +9,10 @@
       "Bash(node:*)",
       "Bash(git fetch:*)",
       "Bash(git checkout:*)",
-      "Bash(git pull:*)"
+      "Bash(git pull:*)",
+      "Bash(\"D:/code/office/contentstudio-claude-product-pipeline/temp_be_story.json\":*)",
+      "WebFetch(domain:developer.shortcut.com)",
+      "Bash(source:*)"
     ]
   }
 }
