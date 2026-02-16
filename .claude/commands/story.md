@@ -52,11 +52,12 @@ Present a short summary to the user.
 Based on approved research, create the stories.
 
 **Read `docs/story-guidelines.md` now** and follow every rule. Key reminders:
-- **No estimates** — leave the estimate field empty (guidelines section 10)
-- **No labels** — don't add labels to stories (guidelines section 11)
-- **Assign a project** — Web App, Mobile, Chrome App, etc. (guidelines section 12)
-- **Use miscellaneous epic** — if no dedicated epic, use the current Miscellaneous epic from config (guidelines section 13)
-- **Create mobile stories if impacted** — separate `[iOS]` and `[Android]` stories when mobile apps are affected (guidelines section 14)
+- **Always use the "New Feature Template"** — pass `story_template_id` from config (guidelines section 1)
+- **No estimates** — leave the estimate field empty (guidelines section 11)
+- **No labels** — don't add labels to stories (guidelines section 12)
+- **Assign a project** — Web App, Mobile, Chrome App, etc. (guidelines section 13)
+- **Use miscellaneous epic** — if no dedicated epic, use the current Miscellaneous epic from config (guidelines section 14)
+- **Create mobile stories if impacted** — separate `[iOS]` and `[Android]` stories when mobile apps are affected (guidelines section 15)
 
 **Determine the story split:**
 - If it's purely frontend (UI change, no new API) → single `[FE]` story
@@ -76,7 +77,7 @@ Based on approved research, create the stories.
 - **Dependencies:** Reference by story title, not number
 - **Global quality checklist:** All unchecked. Add N/A notes only where items clearly don't apply.
 
-**Frontend stories MUST include all UI copy** (per guidelines section 4):
+**Frontend stories MUST include all UI copy** (per guidelines section 5):
 - Labels, tooltips (plain language + examples), subtexts
 - Modal titles/descriptions/CTAs if applicable
 - Error messages, validation messages
@@ -106,6 +107,7 @@ curl -s -X POST -H "Content-Type: application/json" -H "Shortcut-Token: [token]"
   "https://api.app.shortcut.com/api/v3/stories" \
   -d '{
     "name": "[story title]",
+    "story_template_id": "[New Feature Template id from config]",
     "description": "[full story body in markdown — include all template sections]",
     "story_type": "feature",
     "workflow_state_id": [ready_for_dev state id],

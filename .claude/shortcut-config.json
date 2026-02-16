@@ -130,8 +130,17 @@
     "uiux": 85747
   },
 
+  "story_templates": {
+    "new_feature": {
+      "id": "60cc481d-77f9-4f4b-92f0-f0fcc4eff65d",
+      "name": "New Feature Template",
+      "team": null
+    }
+  },
+
   "defaults": {
     "story_workflow_state_id": 500000070,
+    "story_template_id": "60cc481d-77f9-4f4b-92f0-f0fcc4eff65d",
     "epic_state": "to_do",
     "story_type": "feature"
   },

@@ -110,36 +110,37 @@ Based on the approved PRD, create:
 For each story, use the Shortcut story template (`docs/Shortcut story template.md`):
 
 - **Description:** What needs to be built, with context from the PRD
-- **Workflow:** Step-by-step flow **written from the user's POV** — describe what the user does and sees, not technical implementation. (See guidelines section 3)
-- **Acceptance criteria:** Testable checkbox items that a QA engineer can verify pass/fail. (See guidelines section 6)
+- **Workflow:** Step-by-step flow **written from the user's POV** — describe what the user does and sees, not technical implementation. (See guidelines section 4)
+- **Acceptance criteria:** Testable checkbox items that a QA engineer can verify pass/fail. (See guidelines section 7)
 - **Mock-ups:** "See PRD section 7" or "N/A — backend only"
 - **Impact on existing data:** What existing data/schemas are affected
 - **Impact on other products:** Cross-feature impacts
-- **Dependencies:** Reference other stories **by their full title**, never by number. (See guidelines section 1)
-- **Global quality checklist:** All unchecked — this is for devs. Mark N/A items with a reason. No dark mode, no RTL. (See guidelines sections 2 and 7)
+- **Dependencies:** Reference other stories **by their full title**, never by number. (See guidelines section 2)
+- **Global quality checklist:** All unchecked — this is for devs. Mark N/A items with a reason. No dark mode, no RTL. (See guidelines sections 3 and 8)
 
-**Frontend/UI story requirements (guidelines section 4):**
+**Frontend/UI story requirements (guidelines section 5):**
 Every FE story MUST specify the actual UI copy for ALL of these elements:
 - Modal titles, descriptions, CTA button labels, learn-more icon placement
 - Form field labels, placeholders, helper text, validation error messages
 - Toggle/option labels with tooltips (plain language, example-driven, layman-friendly)
 - Info icon (`ℹ`) hover content
-- Empty states (headline, subtext, CTA), error states, loading states (guidelines section 9)
+- Empty states (headline, subtext, CTA), error states, loading states (guidelines section 10)
 
 Write all tooltips and labels as if for a **non-technical user who has never used a social media management tool**. Include concrete examples in tooltips so the user understands instantly without thinking twice.
 
-**Story splitting (guidelines section 5):**
+**Story splitting (guidelines section 6):**
 - Prefix titles: `[BE]` for backend, `[FE]` for frontend, `[Design]` for design, `[iOS]` for iOS, `[Android]` for Android
 - ALL UI copy lives in the FE story, never in BE stories
 - BE stories cover: API endpoints, data models, validation, business logic, jobs, events
-- **Create mobile stories** when the change impacts iOS/Android apps (guidelines section 14)
+- **Create mobile stories** when the change impacts iOS/Android apps (guidelines section 15)
 
-**Platform constraints (guidelines section 2):**
+**Platform constraints (guidelines section 3):**
 - No dark mode references — ContentStudio has no dark mode
 - No RTL language references — not supported
 - Mobile apps have no AI features — AI is web-only
 
-**Shortcut field rules (guidelines sections 10-13):**
+**Shortcut field rules (guidelines sections 1, 11-14):**
+- **Always use the "New Feature Template"** — pass `story_template_id` from config (guidelines section 1)
 - **No estimates** — leave the estimate field empty. Devs estimate during sprint planning.
 - **No labels** — don't add labels to stories.
 - **Always assign a project** — Web App, Mobile, Chrome App, etc. (from config → `projects`)
@@ -182,6 +183,7 @@ curl -s -X POST -H "Content-Type: application/json" -H "Shortcut-Token: [token]"
   "https://api.app.shortcut.com/api/v3/stories" \
   -d '{
     "name": "[story title]",
+    "story_template_id": "[New Feature Template id from config]",
     "description": "[story description in markdown]",
     "story_type": "feature",
     "workflow_state_id": [ready_for_dev state id],
