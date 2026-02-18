@@ -9,7 +9,12 @@
       "Bash(git checkout:*)",
       "Bash(git pull:*)",
       "WebSearch",
-      "Bash(find:*)"
+      "Bash(find:*)",
+      "Bash(dir:*)",
+      "Bash(cmd /c \"dir D:\\\\code\\\\office\\\\contentstudio-claude-product-pipeline\\\\contentstudio-backend\\\\app\\\\Models\")",
+      "Bash(cmd /c \"dir D:\\\\code\\\\office\\\\contentstudio-claude-product-pipeline\\\\contentstudio-backend\")",
+      "Bash(cmd /c:*)",
+      "Bash(echo:*)"
     ]
   }
 }
