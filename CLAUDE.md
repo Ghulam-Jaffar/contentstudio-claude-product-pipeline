@@ -16,6 +16,7 @@ For major features requiring PRDs and dedicated epics.
 **Research → Workflow Design → PRD → Epic + Stories → Push to Shortcut**
 
 - Runs parallel competitor research (WebSearch) + codebase analysis (Explore agent) in Step 1
+- Creates **Shortcut Docs** for both research (Step 1) and PRD (Step 3), then links them to the epic in Step 5
 - Creates a dedicated Shortcut epic for the feature
 - Outputs saved to `docs/features/<slug>/` (01-research.md through 05-shortcut-links.md)
 - Review gate after every step — never proceed without explicit user approval
@@ -50,6 +51,7 @@ The full rules are in `docs/story-guidelines.md`. Key points:
 - **FE stories must include all UI copy:** modal titles, labels, tooltips, placeholders, validation errors, empty/error/loading states — written for non-technical users with concrete examples
 - **No estimates, no labels** — devs handle these during sprint planning
 - **Always assign a Shortcut project** (Web App, Mobile, Chrome App, etc.)
+- **Always assign custom fields:** `priority`, `product_area`, and `skill_set` — IDs in `.claude/shortcut-config.json`
 - **No dark mode, no RTL** — ContentStudio doesn't support either
 - **AI features are web-only** — no mobile AI stories
 - **Color theming:** Use `text-primary-cs-500`, `bg-primary-cs-50`, etc. (CSS variable-backed) — never hardcode colors like `text-blue-600`
@@ -61,9 +63,25 @@ The full rules are in `docs/story-guidelines.md`. Key points:
 - API base: `https://api.app.shortcut.com/api/v3`
 - Auth token: `SHORTCUT_API_TOKEN` env var (loaded from `.env`)
 - Workspace: `contentstudio-team`
-- **Windows curl requirement:** Write JSON payloads to a temp file, use `curl --data @file`
 - Stories default to `ready_for_dev` workflow state (id: 500000070)
 - Epics default to `to_do` state (id: 500000002)
+
+### Windows curl requirement
+Write JSON payloads to a project-local temp file (e.g., `D:/code/office/contentstudio-claude-product-pipeline/tmp-payload.json`), then pass with `curl --data @filename`. Save API responses to a file with `-o`, then parse with `node` (not `python`). Clean up temp files after. Never use `/tmp/` or `/dev/stdin` — they don't work on Windows.
+
+### Checklist tasks (critical gotcha)
+`story_template_id` does **not** auto-create checklist tasks via the API. After creating each story, manually POST all 5 tasks to `POST /stories/{story_id}/tasks`:
+1. `Mobile responsiveness tested (frontend only, N/A for backend-only stories)`
+2. `Multilingual support verified (frontend + backend, translations available or fallback handled)`
+3. `UI theming supported (default + white-label, design library components are being used)`
+4. `White-label domains impact reviewed`
+5. `Cross-product impact assessed (web, mobile apps, Chrome extension)`
+
+### Shortcut Docs (feature pipeline only)
+Create docs via `POST /documents` with `{"title": "...", "content": "...", "content_format": "markdown"}`. Link a doc to an epic via `PUT /documents/{doc_id}/epics/{epic_id}` — returns 204 No Content on success.
+
+### Iteration confirmation
+Before pushing stories, fetch active iterations via `GET /iterations`, find the next upcoming one (status: `unstarted`, nearest `start_date`), and confirm with the user which to use before setting `iteration_id`.
 
 ## ContentStudio Product Context
 

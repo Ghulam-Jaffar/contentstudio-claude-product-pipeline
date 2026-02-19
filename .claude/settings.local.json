@@ -14,7 +14,18 @@
       "Bash(cmd /c \"dir D:\\\\code\\\\office\\\\contentstudio-claude-product-pipeline\\\\contentstudio-backend\\\\app\\\\Models\")",
       "Bash(cmd /c \"dir D:\\\\code\\\\office\\\\contentstudio-claude-product-pipeline\\\\contentstudio-backend\")",
       "Bash(cmd /c:*)",
-      "Bash(echo:*)"
+      "Bash(echo:*)",
+      "Bash(be_story_payload.json:*)",
+      "Bash(fe_story_payload.json:*)",
+      "Bash(do echo \"{\"\"description\"\": \"\"$task\"\", \"\"complete\"\": false}\" curl -s -X POST -H \"Content-Type: application/json\" -H \"Shortcut-Token: $SHORTCUT_API_TOKEN\"  \"https://api.app.shortcut.com/api/v3/stories/111664/tasks\" --data @task_tmp.json)",
+      "Bash(done)",
+      "Bash(do echo \"{\"\"description\"\": \"\"$task\"\", \"\"complete\"\": false}\" curl -s -X POST -H \"Content-Type: application/json\" -H \"Shortcut-Token: $SHORTCUT_API_TOKEN\"  \"https://api.app.shortcut.com/api/v3/stories/111667/tasks\" --data @task_tmp.json)",
+      "Bash(git -C \"D:/code/office/contentstudio-claude-product-pipeline\" status)",
+      "Bash(git -C \"D:/code/office/contentstudio-claude-product-pipeline\" ls-files --others --exclude-standard)",
+      "Bash(git -C \"D:/code/office/contentstudio-claude-product-pipeline\" status --short)",
+      "Bash(git -C \"D:/code/office/contentstudio-claude-product-pipeline\" ls-files --others contentstudio-android-v2/)",
+      "Bash(ios_story_payload.json:*)",
+      "Bash(android_story_payload.json:*)"
     ]
   }
 }
