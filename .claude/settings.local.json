@@ -36,7 +36,10 @@
       "Bash(__NEW_LINE_d08b0fbfa4df733a__ curl -s -X POST -H \"Content-Type: application/json\" -H \"Shortcut-Token: $SHORTCUT_API_TOKEN\" \"https://api.app.shortcut.com/api/v3/epics\" --data @D:/code/CS/tmp-epic-payload.json -o D:/code/CS/tmp-epic-response.json)",
       "Bash(__NEW_LINE_d08b0fbfa4df733a__ node -e \"const d=JSON.parse\\(require\\(''fs''\\).readFileSync\\(''D:/code/CS/tmp-epic-response.json'',''utf8''\\)\\); console.log\\(''EPIC_ID='' + d.id\\);\")",
       "Bash(SHORTCUT_API_TOKEN=\"$SHORTCUT_API_TOKEN\" node:*)",
-      "Bash(echo EXISTS: $\\(basename $dir\\):*)"
+      "Bash(echo EXISTS: $\\(basename $dir\\):*)",
+      "WebFetch(domain:contentstudio.io)",
+      "WebFetch(domain:crisp.chat)",
+      "WebFetch(domain:www.eesel.ai)"
     ]
   }
 }
