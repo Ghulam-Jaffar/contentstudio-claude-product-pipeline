@@ -26,7 +26,17 @@
       "Bash(git -C \"D:/code/office/contentstudio-claude-product-pipeline\" ls-files --others contentstudio-android-v2/)",
       "Bash(ios_story_payload.json:*)",
       "Bash(android_story_payload.json:*)",
-      "WebFetch(domain:schedule-copilot-ai.lovable.app)"
+      "WebFetch(domain:schedule-copilot-ai.lovable.app)",
+      "Bash(__NEW_LINE_29fde0181a411542__ cat)",
+      "Bash(D:/code/CS/tmp-epic-payload.json:*)",
+      "Bash(__NEW_LINE_29fde0181a411542__ curl -s -X POST -H \"Content-Type: application/json\" -H \"Shortcut-Token: $SHORTCUT_API_TOKEN\" \"https://api.app.shortcut.com/api/v3/epics\" --data @D:/code/CS/tmp-epic-payload.json -o D:/code/CS/tmp-epic-response.json)",
+      "Bash(__NEW_LINE_29fde0181a411542__ node -e \"const d=JSON.parse\\(require\\(''fs''\\).readFileSync\\(''D:/code/CS/tmp-epic-response.json'',''utf8''\\)\\); console.log\\(''EPIC_ID='' + d.id\\); console.log\\(''EPIC_URL=https://app.shortcut.com/contentstudio-team/epic/'' + d.id\\);\")",
+      "Bash(git log:*)",
+      "Bash(__NEW_LINE_d08b0fbfa4df733a__ node -e \"\nconst fs = require\\(''fs''\\);\nconst payload = {\n  name: ''Publishing API v1.7 — Labels & Campaigns Support'',\n  description: ''Extend the Publishing API v1 to support labels and campaigns \\(folders\\) across the full lifecycle: listing available labels and campaigns, and passing them when creating posts. Once the core API endpoints are ready, update all integration apps \\(Zapier, Make.com, n8n, GPT app, Claude extension, MCP\\) and the Smart Scheduling via AI feature to leverage the new fields.\\\\n\\\\nThe fetch posts endpoint \\(GET\\) already returns labels and campaigns in the response \\(shipped in the previous release\\). This epic covers the remaining pieces: list endpoints + create post support + integration rollout.'',\n  epic_state_id: 500000002\n};\nfs.writeFileSync\\(''D:/code/CS/tmp-epic-payload.json'', JSON.stringify\\(payload\\)\\);\nconsole.log\\(''Epic payload written''\\);\n\")",
+      "Bash(__NEW_LINE_d08b0fbfa4df733a__ curl -s -X POST -H \"Content-Type: application/json\" -H \"Shortcut-Token: $SHORTCUT_API_TOKEN\" \"https://api.app.shortcut.com/api/v3/epics\" --data @D:/code/CS/tmp-epic-payload.json -o D:/code/CS/tmp-epic-response.json)",
+      "Bash(__NEW_LINE_d08b0fbfa4df733a__ node -e \"const d=JSON.parse\\(require\\(''fs''\\).readFileSync\\(''D:/code/CS/tmp-epic-response.json'',''utf8''\\)\\); console.log\\(''EPIC_ID='' + d.id\\);\")",
+      "Bash(SHORTCUT_API_TOKEN=\"$SHORTCUT_API_TOKEN\" node:*)",
+      "Bash(echo EXISTS: $\\(basename $dir\\):*)"
     ]
   }
 }
