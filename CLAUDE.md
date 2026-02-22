@@ -6,7 +6,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 A **Claude Code-powered product development pipeline** for [ContentStudio](https://contentstudio.io), a social media management platform. It automates the workflow from feature idea → research → PRD → Shortcut stories, with review gates at every step.
 
-This is **not** a code project. There's no package.json or composer.json at root. The `contentstudio-backend/` and `contentstudio-frontend/` directories are **gitignored separate repos** mounted here so the pipeline can analyze the actual codebase when writing stories.
+This is **not** a code project. There's no package.json or composer.json at root. The `contentstudio-backend/`, `contentstudio-frontend/`, `contentstudio-ios-v2/`, and `contentstudio-android-v2/` directories are **gitignored separate repos** mounted here so the pipeline can analyze the actual codebase when writing stories.
 
 ## Two Pipeline Commands
 
@@ -89,8 +89,10 @@ The pipeline analyzes and writes stories for these codebases (mounted but gitign
 
 - **`contentstudio-backend/`** — Laravel 10 API (PHP 8.3, MongoDB, Redis, Kafka). Has its own `CLAUDE.md` with project-specific rules.
 - **`contentstudio-frontend/`** — Vue 3 SPA (Composition API, Vuex → Pinia). Has docs in `contentstudio-frontend/docs/`.
+- **`contentstudio-ios-v2/`** — iOS app (Swift, Xcode, CocoaPods). Analyzed only when the feature/story involves mobile.
+- **`contentstudio-android-v2/`** — Android app (Kotlin, Gradle). Analyzed only when the feature/story involves mobile.
 
-When the pipeline does codebase analysis, it searches these directories for relevant models, controllers, services, components, routes, and composables to ground stories in the actual implementation.
+When the pipeline does codebase analysis, it searches these directories for relevant models, controllers, services, components, routes, and composables to ground stories in the actual implementation. iOS/Android codebases are included **only when the feature description or request mentions mobile, iOS, or Android**.
 
 ## Branch & PR Conventions (for code implementation)
 

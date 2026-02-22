@@ -29,6 +29,7 @@ This contains a description of the change/improvement. It may include context ab
 - Use **Grep** to quickly find relevant files (e.g., search for route names, component names, model fields)
 - Use **Read** only on the specific files/sections you need — read targeted line ranges, not entire 500-line files
 - Identify: key file paths, current behavior, what needs to change, what can be reused
+- **If the story involves mobile/iOS/Android:** Also search `contentstudio-ios-v2/` (Swift) and `contentstudio-android-v2/` (Kotlin) for related view controllers/activities, models, services, API clients, and screens
 
 **Light external research** (only if the change involves a UX pattern):
 - Do 1-2 quick WebSearches max — just for UX inspiration, not a full analysis
@@ -38,6 +39,7 @@ This contains a description of the change/improvement. It may include context ab
 - **Current State** — brief summary + key file paths
 - **What Needs to Change** — bullet list of specific changes
 - **UX Reference** (only if applicable) — 1-2 sentence summary of how others do it
+- **Mobile Context** (only if the story involves mobile) — existing iOS/Android screens/flows affected, what the apps currently support
 - **Files Involved** — list of files that will be touched
 
 Present a short summary to the user.

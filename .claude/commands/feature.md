@@ -48,12 +48,14 @@ Launch **two subagents in parallel** using the Task tool:
 **Subagent B — Codebase Analysis** (subagent_type: "Explore", thoroughness: "medium")
 - Search `contentstudio-backend/` for: related models, controllers, services, routes
 - Search `contentstudio-frontend/` for: related modules, components, composables, routes
+- **If the feature involves mobile/iOS/Android:** Also search `contentstudio-ios-v2/` (Swift) and `contentstudio-android-v2/` (Kotlin) for: related view controllers/activities, models, services, API clients, screens
 - Be token-efficient: use Grep to find files, then Read only the specific sections needed — don't read entire large files
 - Compile a concise report:
   - **Existing Related Code** — what we already have (with file paths)
   - **Reusable Components/Services** — what can be leveraged
   - **Integration Points** — where the new feature would plug in
   - **Technical Considerations** — database, API, queue, caching implications
+  - **Mobile Impact** (if applicable) — existing mobile screens/flows affected, what the iOS/Android apps currently support for this area
 
 **After both complete**, combine into `docs/features/<slug>/01-research.md` and present a summary to the user.
 
