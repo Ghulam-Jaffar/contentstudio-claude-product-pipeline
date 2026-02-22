@@ -25,7 +25,8 @@
       "Bash(git -C \"D:/code/office/contentstudio-claude-product-pipeline\" status --short)",
       "Bash(git -C \"D:/code/office/contentstudio-claude-product-pipeline\" ls-files --others contentstudio-android-v2/)",
       "Bash(ios_story_payload.json:*)",
-      "Bash(android_story_payload.json:*)"
+      "Bash(android_story_payload.json:*)",
+      "WebFetch(domain:schedule-copilot-ai.lovable.app)"
     ]
   }
 }
