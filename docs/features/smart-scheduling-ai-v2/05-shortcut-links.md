@@ -5,6 +5,7 @@
 
 ## Docs (linked to epic)
 - [PRD: Smart Scheduling via AI V2 (Guided Conversational Workflow)](https://app.shortcut.com/contentstudio-team/write/IkRvYyI6I3V1aWQgIjY5OTk4Yzg3LWQ0YWMtNGRmYS1iN2RlLWQ0NTU2NGQxZDhhZCI=) — already linked to epic ✓
+- [Workflow: Smart Scheduling via AI V2](https://app.shortcut.com/contentstudio-team/write/IkRvYyI6I3V1aWQgIjY5OWM4ZTY2LTAzNTgtNGUxOS04YjRmLTJhNDMzM2NmNzZiMCI=) — linked to epic ✓
 
 ## Stories (Sprint: 23 Feb – 06 March 2026)
 
