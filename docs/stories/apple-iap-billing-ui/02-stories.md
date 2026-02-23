@@ -20,7 +20,7 @@ This story adds an informational UI section to the billing page that:
   - Add `isAppleIapUser` computed based on `getPlan.apple_iap`
   - Wrap the invoice section (lines ~445–561) with `v-if="!isAppleIapUser"`
   - Add the new iOS info section with `v-if="isAppleIapUser"` in the same location
-  - The "Upgrade Subscription" button in the plan header (line ~96) should also be hidden for Apple IAP users (`v-if="isPlanUpgradeable && !isAppleIapUser"`) since the new info section already has the upgrade CTA — avoids duplicate CTAs
+  - The "Upgrade Subscription" button in the plan header (line ~96) should also be hidden for Apple IAP users (`v-if="isPlanUpgradeable && !isAppleIapUser"`) since the new info section already has the "Upgrade Plan" CTA — avoids duplicate CTAs
 
 ---
 
@@ -32,22 +32,25 @@ This story adds an informational UI section to the billing page that:
 > You're subscribed via the iOS app
 
 **Body paragraph:**
-> Because Apple charges a 30% fee on all in-app purchases, your iOS plan is priced higher than our equivalent web plans. On your current iOS plan, some features are not available — including Inbox and Competitor Analytics.
+> You're currently subscribed to ContentStudio through an Apple In-App Purchase. Because of this, your plan is priced higher than our equivalent web plans. Your current plan also comes with limited features and options — explore our web plans to see everything that's available.
 
-**Feature gap list** (shown as a short bullet list with lock or info icons):
-- Social Inbox — not available on iOS plans
-- Competitor Analytics — not available on iOS plans
-- Add-on management — not available on iOS plans
+**Manage subscription note** (shown just below the body paragraph, subdued gray, normal readable text size — not small):
+> All plan changes, upgrades, and cancellations for your Apple subscription are managed through your iPhone. Go to **iPhone Settings → [Your Name] → Subscriptions**, find ContentStudio, and manage your plan from there.
 
 **Upgrade prompt paragraph:**
-> Upgrade to a web plan to unlock all features at a lower price. You can choose from our Standard, Advanced, or Agency plans.
+> Want a better price or more features? You can upgrade to a web plan directly from here. However, to avoid being charged twice, you'll need to **cancel your current Apple subscription from your iPhone first** before completing the upgrade.
 
-**Primary CTA button:** `Explore Web Plans`
+**Steps before upgrading** (numbered list, clearly visible, not small text):
+1. On your iPhone, go to **Settings → [Your Name] → Subscriptions**
+2. Find **ContentStudio** and tap **Cancel Subscription**
+3. Once cancelled, come back here and click **Upgrade Plan** below
+4. Choose a web plan and complete the upgrade
+
+**Important note** (inline info banner or subdued callout):
+> ContentStudio cannot cancel your Apple subscription on your behalf. This is required by Apple — only you can manage and cancel an Apple In-App Purchase from your device.
+
+**Primary CTA button:** `Upgrade Plan`
 - On click → calls `showUpgradeModal()` (the existing upgrade plan modal, already used elsewhere in this component)
-
-**Manage Apple subscription note** (smaller text below the CTA, subdued gray):
-> To cancel your subscription, you'll need to do it directly from your iPhone — ContentStudio cannot cancel Apple subscriptions on your behalf. Go to **Settings → [Your Name] → Subscriptions** on your iPhone, find ContentStudio, and tap **Cancel Subscription**.
-> [Learn how to cancel →](#) *(links to ContentStudio help doc — URL to be provided by product/support team)*
 
 ---
 
@@ -56,14 +59,18 @@ This story adds an informational UI section to the billing page that:
 1. User subscribes to ContentStudio via the iOS app (Apple IAP)
 2. User logs in to ContentStudio on the web and navigates to **Settings → Billing**
 3. Instead of the empty invoice table, they see the iOS subscriber info card:
-   - Headline and explanation of iOS pricing vs web pricing
-   - List of features not available on their current plan
-   - "Explore Web Plans" CTA
-   - Note on how to manage their Apple subscription
-4. User clicks **"Explore Web Plans"**
-5. The upgrade plan modal opens, showing available web plans (Standard, Advanced, Agency)
-6. User selects a plan and completes the upgrade through the existing checkout flow
-7. For users **without** `apple_iap`, the billing page works exactly as before — invoices table shows, no info card
+   - Headline: "You're subscribed via the iOS app"
+   - Body explaining their plan is priced higher and has limited features compared to web plans
+   - A note that plan changes, upgrades, and cancellations are managed through iPhone Settings
+   - An upgrade prompt explaining they can switch to a web plan, but must cancel their Apple subscription first to avoid dual charges
+   - A numbered step-by-step guide on how to cancel their Apple IAP before upgrading
+   - An inline callout clarifying ContentStudio cannot cancel Apple subscriptions on their behalf
+   - An **"Upgrade Plan"** button
+4. User reads the steps, goes to their iPhone, and cancels their Apple subscription via **iPhone Settings → [Your Name] → Subscriptions**
+5. User returns to the web billing page and clicks **"Upgrade Plan"**
+6. The upgrade plan modal opens, showing available web plans (Standard, Advanced, Agency)
+7. User selects a plan and completes the upgrade through the existing checkout flow
+8. For users **without** `apple_iap`, the billing page works exactly as before — invoices table shows, no info card
 
 ---
 
@@ -71,13 +78,17 @@ This story adds an informational UI section to the billing page that:
 
 - [ ] Users with `getPlan.apple_iap === true` do **not** see the invoice/billing history section on the billing page
 - [ ] Users with `getPlan.apple_iap === true` see the iOS subscriber info card in the left column where the invoices section was
-- [ ] The info card displays: headline "You're subscribed via the iOS app", explanation paragraph mentioning Apple's 30% fee, feature gap list (Inbox, Competitor Analytics, Add-on management), upgrade prompt, and "Explore Web Plans" button
-- [ ] Clicking "Explore Web Plans" opens the upgrade plan modal (same as the existing `showUpgradeModal()` call)
-- [ ] The cancellation note below the CTA reads: "To cancel your subscription, you'll need to do it directly from your iPhone — ContentStudio cannot cancel Apple subscriptions on your behalf. Go to Settings → [Your Name] → Subscriptions on your iPhone, find ContentStudio, and tap Cancel Subscription."
-- [ ] A "Learn how to cancel →" link is shown below the cancellation note, linking to the ContentStudio help doc (URL to be provided before release)
+- [ ] The info card displays the headline: "You're subscribed via the iOS app"
+- [ ] The body paragraph reads: "You're currently subscribed to ContentStudio through an Apple In-App Purchase. Because of this, your plan is priced higher than our equivalent web plans. Your current plan also comes with limited features and options — explore our web plans to see everything that's available."
+- [ ] A subscription management note is shown below the body paragraph (in subdued gray, at a legible text size — not small): "All plan changes, upgrades, and cancellations for your Apple subscription are managed through your iPhone. Go to iPhone Settings → [Your Name] → Subscriptions, find ContentStudio, and manage your plan from there."
+- [ ] The upgrade prompt reads: "Want a better price or more features? You can upgrade to a web plan directly from here. However, to avoid being charged twice, you'll need to cancel your current Apple subscription from your iPhone first before completing the upgrade."
+- [ ] The numbered step-by-step list is shown clearly (not in small text): Step 1: On your iPhone, go to Settings → [Your Name] → Subscriptions / Step 2: Find ContentStudio and tap Cancel Subscription / Step 3: Once cancelled, come back here and click Upgrade Plan below / Step 4: Choose a web plan and complete the upgrade
+- [ ] An inline callout or banner reads: "ContentStudio cannot cancel your Apple subscription on your behalf. This is required by Apple — only you can manage and cancel an Apple In-App Purchase from your device."
+- [ ] The primary CTA button is labelled **"Upgrade Plan"** and on click opens the upgrade plan modal (`showUpgradeModal()`)
 - [ ] The "Upgrade Subscription" button in the plan header is hidden for Apple IAP users (the info card's CTA serves this purpose instead)
 - [ ] Users without `apple_iap` see the billing page exactly as before — invoices table is shown, no info card appears
 - [ ] The info card uses theme-aware Tailwind classes (`text-primary-cs-500`, `bg-primary-cs-50`, etc.) — no hardcoded color values
+- [ ] All text in the card is rendered at a legible size; the cancellation steps and management note are NOT rendered in a small/muted font that makes them easy to overlook
 - [ ] The info card is consistent with the existing billing page visual style
 
 ---

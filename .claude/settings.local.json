@@ -39,7 +39,13 @@
       "Bash(echo EXISTS: $\\(basename $dir\\):*)",
       "WebFetch(domain:contentstudio.io)",
       "WebFetch(domain:crisp.chat)",
-      "WebFetch(domain:www.eesel.ai)"
+      "WebFetch(domain:www.eesel.ai)",
+      "Bash(cat:*)",
+      "Bash(python3:*)",
+      "Bash(printf %s:*)",
+      "Bash(cd:*)",
+      "Bash(ls:*)",
+      "Bash(git:*)"
     ]
   }
 }

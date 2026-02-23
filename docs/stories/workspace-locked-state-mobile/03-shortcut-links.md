@@ -4,6 +4,7 @@
 
 | Story | Link |
 |---|---|
+| [Design] Design locked workspace UI for iOS and Android apps | [sc-112089](https://app.shortcut.com/contentstudio-team/story/112089) |
 | [iOS] Show locked workspace state and block switching to locked workspaces | [sc-111683](https://app.shortcut.com/contentstudio-team/story/111683) |
 | [Android] Improve locked workspace UX — reason-specific messaging and active workspace popup | [sc-111684](https://app.shortcut.com/contentstudio-team/story/111684) |
 
