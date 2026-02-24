@@ -45,7 +45,9 @@
       "Bash(printf %s:*)",
       "Bash(cd:*)",
       "Bash(ls:*)",
-      "Bash(git:*)"
+      "Bash(git:*)",
+      "Bash(head:*)",
+      "Bash(grep:*)"
     ]
   }
 }
