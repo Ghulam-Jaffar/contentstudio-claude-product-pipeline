@@ -91,8 +91,10 @@ The pipeline analyzes and writes stories for these codebases (mounted but gitign
 - **`contentstudio-frontend/`** — Vue 3 SPA (Composition API, Vuex → Pinia). Has docs in `contentstudio-frontend/docs/`.
 - **`contentstudio-ios-v2/`** — iOS app (Swift, Xcode, CocoaPods). Analyzed only when the feature/story involves mobile.
 - **`contentstudio-android-v2/`** — Android app (Kotlin, Gradle). Analyzed only when the feature/story involves mobile.
+- **`contentstudio-ai-agents/`** — Python 3.13 multi-agent platform (Agno framework, FastAPI, Dramatiq + Redis, Kafka, PostgreSQL). Handles AI content generation (captions, images, videos, analytics). Has its own `CLAUDE.md`. Analyzed only when the feature/story involves AI generation or the AI agent pipeline.
+- **`contentstudio-social-analytics-go/`** — Go microservices analytics pipeline (Kafka, ClickHouse, MongoDB). 5-stage pipeline: Scheduler → Fetcher → Parser → Processor → Sink. Analyzed only when the feature/story involves social media analytics data processing.
 
-When the pipeline does codebase analysis, it searches these directories for relevant models, controllers, services, components, routes, and composables to ground stories in the actual implementation. iOS/Android codebases are included **only when the feature description or request mentions mobile, iOS, or Android**.
+When the pipeline does codebase analysis, it searches these directories for relevant models, controllers, services, components, routes, and composables to ground stories in the actual implementation. iOS/Android codebases are included **only when the feature description or request mentions mobile, iOS, or Android**. AI agents and analytics Go codebases are included only when the feature description explicitly involves AI generation or analytics data pipelines.
 
 ## Branch & PR Conventions (for code implementation)
 
