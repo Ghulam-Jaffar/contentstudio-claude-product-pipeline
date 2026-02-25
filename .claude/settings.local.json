@@ -47,7 +47,24 @@
       "Bash(ls:*)",
       "Bash(git:*)",
       "Bash(head:*)",
-      "Bash(grep:*)"
+      "Bash(grep:*)",
+      "Bash(printenv:*)",
+      "Bash(xxd:*)",
+      "WebFetch(domain:www.tidio.com)",
+      "WebFetch(domain:www.intercom.com)",
+      "WebFetch(domain:manychat.com)",
+      "WebFetch(domain:minami.ai)",
+      "WebFetch(domain:www.agorapulse.com)",
+      "WebFetch(domain:www.featurebase.app)",
+      "WebFetch(domain:hackceleration.com)",
+      "WebFetch(domain:www.zoho.com)",
+      "WebFetch(domain:www.motviz.com)",
+      "WebFetch(domain:fin.ai)",
+      "WebFetch(domain:fritz.ai)",
+      "WebFetch(domain:www.desk365.io)",
+      "WebFetch(domain:socialrails.com)",
+      "WebFetch(domain:www.amio.io)",
+      "WebFetch(domain:www.freshworks.com)"
     ]
   }
 }
