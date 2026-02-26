@@ -1,35 +1,45 @@
-# AI Auto Replies — Pricing & Limits Strategy (v2)
+# AI Auto Replies — Pricing & Limits Strategy (v3)
 
 ## Feature Summary
 
 AI Auto Replies is a rule-based automation layer on top of ContentStudio's Social Inbox. Users define rules with keyword triggers, intent instructions, account targeting, and a reply type (AI-generated or hardcoded manual). When a message arrives, the AI classifies whether the rule's intent truly applies, then drafts or sends a reply automatically. After saving a rule, AI reviews it and suggests improvements to triggers and intent instructions.
 
-This is a **paid addon** — users must purchase the addon to unlock the feature. Usage is metered on **AI Replies** (not tokens or credits).
+---
+
+## Naming
+
+- **Feature name:** AI Auto Replies
+- **Purchasable top-up unit:** AI Inbox Replies
+
+"AI Inbox Replies" is used specifically for the quota unit — how many AI-drafted or AI-sent replies are available. The name is concrete (100 AI Inbox Replies = AI will write/send up to 100 replies), avoids the confusion of "credits", and sits naturally alongside AI Text Credits, AI Image Credits, AI Video Credits in ContentStudio's billing UI.
 
 ---
 
-## What Changed from the Previous Draft
+## What Changed from Previous Drafts
 
-The v1 draft used a granular credit system (1 credit for classification, 5 credits for generation, 1 credit for rule review). This was scrapped in favour of how the industry actually prices it:
+**v1 → v2:** Replaced a 3-tier credit system (1 credit classification, 5 credits generation, 1 credit review) with a flat "1 AI reply = 1 deduction" model. Review & suggestions made free.
 
-- **Before:** 3 separate credit types, variable deductions per operation, hard to explain to users
-- **After:** 1 AI Reply = 1 deduction, flat and predictable, consistent with how Tidio, Intercom, Freshdesk, and others price it
+**v2 → v3:**
+- Corrected plan names: Standard / Advanced / Agency Unlimited (not Agency Small/Medium/Large)
+- Replaced arbitrary per-plan allotments with a **single formula** derived from social accounts
+- Separated the unlock fee from the top-up clearly in language and structure
+- Renamed top-up unit to "AI Inbox Replies"
 
 ---
 
-## What Counts as 1 AI Reply
+## What Counts as 1 AI Inbox Reply
 
 | Action | Counts? |
 |--------|---------|
-| AI **drafts** a reply (Review & Send mode — you approve before it goes out) | ✅ Yes — 1 AI Reply |
-| AI **sends** a reply automatically (Auto-Send mode) | ✅ Yes — 1 AI Reply |
+| AI **drafts** a reply (Review & Send mode — you approve before it goes out) | ✅ Yes — 1 AI Inbox Reply |
+| AI **sends** a reply automatically (Auto-Send mode) | ✅ Yes — 1 AI Inbox Reply |
 | AI intent classification (deciding if a rule should fire) | ❌ Free |
 | AI rule review & improvement suggestions (on save/edit) | ❌ Free |
 | Manual/hardcoded reply rules (no AI involved) | ❌ Free |
 | Rule management (create, edit, delete, toggle) | ❌ Free |
 | Viewing auto-reply logs | ❌ Free |
 
-**Rule of thumb:** If AI put words in a reply box — paid. Everything else — free.
+**Rule of thumb:** If AI put words in a reply — it counts. Everything else is free.
 
 ---
 
@@ -39,173 +49,182 @@ The v1 draft used a granular credit system (1 credit for classification, 5 credi
 
 | Tool | Plans | AI Inbox / Auto-Reply | AI Pricing Model |
 |------|-------|----------------------|-----------------|
-| **Hootsuite** | From $99/mo | AI Smart Replies (Advanced/Enterprise only) — AI suggests contextual replies for agents to approve or send. Full AI chatbot on Enterprise. | Bundled into plan — no per-reply charge. AI features unavailable without upgrading to expensive tiers. |
-| **Sprout Social** | From $249/seat/mo | AI-assisted inbox suggestions, bot builder (Advanced plan). Automated chatbot for DMs. | Bundled into plan — no per-reply charge. Extremely high seat cost makes it enterprise-only. |
-| **Agorapulse** | From $79/user/mo | AI Reply Suggestions (April 2025 launch) — suggests replies based on past conversations. Automated inbox assistant on Advanced. | Bundled into plan — no per-reply charge. Feature availability varies by plan tier. |
+| **Hootsuite** | From $99/mo | AI Smart Replies (Advanced/Enterprise only) — suggests contextual replies for agents to approve or send. Full AI chatbot on Enterprise. | Bundled into plan — no per-reply charge. AI features unavailable without upgrading to expensive tiers. |
+| **Sprout Social** | From $249/seat/mo | AI-assisted inbox suggestions, bot builder on Advanced. Automated chatbot for DMs. | Bundled into plan — no per-reply charge. Effectively enterprise-only pricing. |
+| **Agorapulse** | From $79/user/mo | AI Reply Suggestions (April 2025). Automated inbox assistant on Advanced. | Bundled — no per-reply charge. Feature availability varies by tier. |
 
 ### Dedicated AI Chat / Support Tools
 
 | Tool | Plan | AI Auto-Reply Access | Price | Usage Limit |
 |------|------|---------------------|-------|-------------|
-| **Tidio Lyro** | Lyro AI Agent | AI conversation agent for website + social chat | $39–$149/mo | 50–1,000 conversations/mo (a conversation = full session with multiple back-and-forth messages) |
-| **Intercom Fin** | Any seat plan + Fin | Autonomous AI agent that resolves support tickets | $0.99 per resolution + $29–132/seat/mo | Pay-per-use, no monthly cap |
-| **Freshdesk Freddy AI** | Growth+ plans | AI bot that handles sessions; hands off to human agents | $100 per 1,000 sessions | 500 free sessions; session = unique convo in 24-hr window |
-| **ManyChat** | Pro + AI addon | AI intention recognition, AI reply steps in flows | $15/mo (Pro, contact-based) + $29/mo AI addon | Unlimited AI steps on Pro+AI — but contact-based cap on free tier |
-| **Crisp** | Essentials ($95/mo) / Plus ($295/mo) | AI-powered resolutions built into platform | Flat plan fee | 50 AI uses/mo on Essentials; **unlimited AI resolutions** on Plus |
+| **Tidio Lyro** | Lyro AI Agent | AI conversation agent for website + social chat | $39–$149/mo | 50–1,000 conversations/mo (conversation = full multi-message session) |
+| **Intercom Fin** | Any seat plan + Fin | Autonomous AI agent resolves support tickets | $0.99/resolution + $29–132/seat/mo | Pay-per-use, no cap |
+| **Freshdesk Freddy AI** | Growth+ plans | AI bot handles sessions; hands off to human agents | $100 per 1,000 sessions | 500 free sessions; session = unique convo in 24-hr window |
+| **ManyChat** | Pro + AI addon | AI intention recognition, AI reply steps in flows | $15/mo (contact-based) + $29/mo AI addon | Unlimited AI steps on Pro+AI |
+| **Crisp** | Essentials / Plus | AI-powered resolutions built into platform | €95/mo / €295/mo | 50 AI uses/mo on Essentials; unlimited on Plus |
 
 ### Key Takeaways
 
-- **SMM tools** (Hootsuite, Sprout, Agorapulse) bundle AI into expensive plans — no per-reply pricing, but the floor price is prohibitive ($79–$249+/user/mo)
-- **Dedicated AI tools** (Tidio, Intercom, Freshdesk) price on **conversations/sessions/resolutions** — not raw token or API usage
-- **ManyChat** is affordable but contact-based, not reply-based — different use case (chatbot flows)
-- **Crisp Plus** at $295/mo for unlimited AI resolutions is the only "unlimited" flat model at accessible pricing — but it's a full customer support platform, not an SMM tool
-- **No SMMT competitor** offers a clean, affordable AI auto-reply addon with per-plan allotments — this is a real gap ContentStudio can fill at an accessible price point with a transparent "AI replies sent" metric
+- SMM tools bundle AI into expensive plans ($79–$249+/user/mo) — no per-reply pricing but the floor cost is prohibitive
+- Dedicated AI tools price on conversations/sessions/resolutions — not tokens or raw API usage
+- No SMMT competitor offers an affordable AI auto-reply unlock with a transparent per-reply quota — ContentStudio fills this gap at $19/mo
 
 ---
 
-## Addon Name
+## Access Model
 
-**AI Auto Replies**
+**Step 1 — Unlock:** Pay $19/mo to activate AI Auto Replies for the workspace. This unlocks the feature and includes a base allotment of AI Inbox Replies derived from the plan's social account count.
 
-Consistent with ContentStudio's existing naming pattern (AI Text Credits, AI Image Credits, AI Video Credits). Self-explanatory, maps cleanly to marketing copy.
-
----
-
-## Two-Layer Access Model
-
-Both layers must be active for AI features to work:
+**Step 2 — Top up (optional):** If the base allotment is exceeded, purchase additional AI Inbox Replies in increments from the billing page.
 
 ```
-Layer 1: Addon purchased (workspace-level unlock)
-    ↓
-Layer 2: AI Reply limit available (consumed per AI-drafted/sent reply)
+Plan subscription (Advanced / Agency Unlimited)
+    → Includes Social Inbox access
+        → Unlock AI Auto Replies ($19/mo)
+            → Base AI Inbox Replies allotment (derived from social accounts)
+                → Top up AI Inbox Replies if needed (+$5/mo per 100 replies)
 ```
-
-If **Layer 1 is missing** → entire Auto Replies feature is locked (no rules can be created).
-If **Layer 2 is exhausted** → addon stays unlocked, but AI reply rules pause (manual rules continue).
 
 ---
 
-## Addon Pricing
+## Unlock Fee
 
 |  | Monthly | Annual |
 |--|---------|--------|
-| **AI Auto Replies addon** | **$19/workspace/mo** | **$15/workspace/mo** |
+| **AI Auto Replies unlock** | **$19/workspace/mo** | **$15/workspace/mo** |
 
-- Available on **Advanced and Agency plans only** (Standard has no Inbox)
-- Per-workspace purchase — agencies with multiple workspaces pay per workspace
+- Available on **Advanced and Agency Unlimited plans only** (Standard has no Social Inbox)
+- Per-workspace — agencies with multiple workspaces pay per workspace
 - Unlocks: rule creation, AI intent classification, AI reply drafting/sending, AI rule review & suggestions
 
 ---
 
-## AI Reply Limits by Plan
+## The Formula
 
-Limits are per workspace, per billing month. Resets on billing date.
+> **1 social account = 20 AI Inbox Replies/month**
 
-| Plan | Included AI Replies/mo | Capacity Illustration |
-|------|----------------------|-----------------------|
-| **Advanced** ($49/mo) | **300** | ~300 AI-drafted or auto-sent replies/mo across all accounts |
-| **Agency** ($99/mo+) | **750** | ~750 replies across workspaces |
-| **Agency Unlimited** | **2,500 base** | + per-account bonus (see below) |
-
-### Agency Unlimited — Per Social Account Bonus
-
-Agency Unlimited users get additional AI replies based on the number of social accounts actively connected to their workspace:
-
-**+10 AI Replies per connected social account per month**
-
-| Connected Accounts | Base | Bonus | Total AI Replies/mo |
-|--------------------|------|-------|---------------------|
-| 50 accounts | 2,500 | +500 | **3,000** |
-| 100 accounts | 2,500 | +1,000 | **3,500** |
-| 200 accounts | 2,500 | +2,000 | **4,500** |
-| 500 accounts | 2,500 | +5,000 | **7,500** |
-
-This rewards agencies that run ContentStudio at scale and directly ties AI usage allotment to the scope of their operation. It mirrors ContentStudio's existing "per social account" pricing model for other addons.
+This single rate drives base allotments, per-account scaling, and top-up increments uniformly. No separate logic per plan — everything flows from account count.
 
 ---
 
-## Buying More AI Replies
+## Base Allotment by Plan
 
-Top-up packs are workspace-scoped and auto-renew monthly:
+Allotment is calculated from the plan's included social account count at the time of unlock.
 
-| Pack | Monthly Price | Annual Price | Per-Reply Cost |
-|------|-------------|--------------|---------------|
-| **250 AI Replies** | $7/mo | $6/mo | ~$0.028/reply |
-| **750 AI Replies** | $17/mo | $14/mo | ~$0.023/reply (~18% savings) |
-| **2,500 AI Replies** | $45/mo | $36/mo | ~$0.018/reply (~36% savings) |
+| Plan | Price | Included Social Accounts | Base AI Inbox Replies/mo |
+|------|-------|--------------------------|--------------------------|
+| **Standard** | $19/mo | 5 accounts | — (no Social Inbox) |
+| **Advanced** | $49/mo | 10 accounts | **200 AI Inbox Replies/mo** |
+| **Agency Unlimited** | $99/mo+ | 25 accounts (base) | **500 AI Inbox Replies/mo** |
 
-- Multiple packs can be stacked on a single workspace
-- Packs renew alongside the main subscription
-- Packs deduct after the plan's included replies are exhausted
+---
+
+## Agency Unlimited — Per Social Account Scaling
+
+Agency Unlimited users add social accounts over time. Each additional connected account increases the AI Inbox Replies allotment by the same rate:
+
+**+20 AI Inbox Replies per connected social account per month**
+
+| Total Connected Accounts | AI Inbox Replies/mo |
+|--------------------------|---------------------|
+| 25 (base) | 500 |
+| 50 | 1,000 |
+| 100 | 2,000 |
+| 200 | 4,000 |
+| 500 | 10,000 |
+
+Allotment is recalculated when accounts are added or removed, taking effect from the next billing cycle.
+
+---
+
+## Top-Up: AI Inbox Replies
+
+When the monthly allotment is exhausted, users can purchase additional AI Inbox Replies from the billing page. Follows ContentStudio's standard addon increment model:
+
+| Increment | Price |
+|-----------|-------|
+| **100 AI Inbox Replies** | **$60/year ($5/mo)** |
+
+- Multiple increments can be purchased and stacked
+- Each increment of 100 replies = 5 accounts' worth of allotment at the standard rate
+- Increments renew annually alongside the main subscription
+- Top-up deducts after the base allotment is exhausted
+
+**Examples:**
+
+| Extra replies needed | Increments to buy | Annual cost |
+|---------------------|-------------------|-------------|
+| ~100 | 1 | $60/yr |
+| ~200 | 2 | $120/yr |
+| ~500 | 5 | $300/yr |
 
 ---
 
 ## Profitability Check
 
-Estimated AI generation cost per reply (using Claude Haiku or equivalent): **~$0.002–$0.005/reply** (intent classification + reply generation, combined).
+Estimated AI cost per reply (Claude Haiku-level, classification + generation combined): **~$0.002–$0.005/reply**
 
-| Scenario | Revenue | AI Cost | Gross Margin |
-|----------|---------|---------|-------------|
-| Addon only, Advanced (300 replies used) | $19 | ~$1.00 | ~$18 (95%) |
-| Addon only, Agency (750 replies used) | $19 | ~$2.50 | ~$16.50 (87%) |
-| Addon + 750-reply pack (1,500 replies used) | $36 | ~$5.00 | ~$31 (86%) |
-| Agency Unlimited, 200 accounts (4,500 replies used) | $19 | ~$15 | ~$4 (21%) |
-| Agency Unlimited + 2,500-reply pack (7,000 replies used) | $64 | ~$23 | ~$41 (64%) |
+| Scenario | Unlock Revenue | AI Cost | Gross Margin |
+|----------|---------------|---------|-------------|
+| Advanced, full allotment used (200 replies) | $19/mo | ~$0.60 | ~$18.40 (~97%) |
+| Agency Unlimited base, full use (500 replies) | $19/mo | ~$1.50 | ~$17.50 (~92%) |
+| Agency Unlimited, 100 accounts, full use (2,000 replies) | $19/mo | ~$6.00 | ~$13.00 (~68%) |
+| Advanced + 1 top-up increment (300 replies) | $24/mo | ~$0.90 | ~$23.10 (~96%) |
+| Agency Unlimited, 100 accounts + 5 increments (2,500 replies) | $44/mo | ~$7.50 | ~$36.50 (~83%) |
 
-**Notes:**
-- Agency Unlimited with heavy AI usage and no top-ups is the one edge case with thin margin — solved by the per-account bonus design (heavy users tend to buy top-ups)
-- If 30%+ of Agency Unlimited users exhaust their limit and buy even one top-up pack, overall blended margin is strong
-- Review & suggestions being free has near-zero cost impact (one lightweight API call per rule save)
+At realistic AI generation costs, margins remain strong even at high usage. The $19 unlock covers AI costs many times over at base allotment levels.
 
 ---
 
 ## Exhaustion Behavior
 
-When AI Replies hit 0 mid-month:
+When AI Inbox Replies hit 0 mid-month:
 
-1. **AI rules pause** — keyword triggers still match, but AI classification is skipped; the rule does not fire (prevents unreviewed replies going out)
-2. **Manual rules continue** — hardcoded reply rules are unaffected
-3. **In-app banner** — shown in Inbox and Auto-Replies settings: *"You've used all your AI Replies for this month. [Buy more] or wait for reset on [date]."*
-4. **Email notifications** — sent to workspace owner at 80% usage and again at 0%
-5. **No automatic top-up** — user must manually purchase or wait for monthly reset
+1. **AI rules pause** — keyword triggers still match, but AI classification is skipped; the rule does not fire
+2. **Manual/hardcoded rules continue** unaffected
+3. **In-app banner** in Inbox and Auto-Replies settings: *"You've used all your AI Inbox Replies for this month. [Buy more] or wait for reset on [date]."*
+4. **Email notifications** to workspace owner at 80% usage and again at 0%
+5. **No automatic top-up** — user must manually purchase or wait for reset
 
-### What Stays Functional at 0 AI Replies
+### What Stays On at 0 AI Inbox Replies
 
-- Rule management (create, edit, delete, enable/disable) — no AI replies consumed
-- Viewing auto-reply logs and history
-- Keyword matching logic (evaluated, just not acted on)
-- Manual hardcoded reply rules (reply sends; no AI involved)
-- AI rule review & suggestions when saving a rule (free operation)
+- Rule management (create, edit, delete, toggle)
+- Viewing auto-reply logs
+- Keyword matching (evaluated, not acted on)
+- Manual hardcoded reply rules (send as normal)
+- AI rule review & suggestions on save (free operation)
 
 ---
 
 ## Billing & Reset Rules
 
-- Limits reset on the **workspace billing date** each month — no rollover
-- Top-up packs renew monthly alongside the main subscription
-- Downgrading plan: limit caps to new plan's allotment at next reset
-- Cancelling addon: active AI rules pause immediately; rule data retained for 90 days
-- **Free trial:** 25 AI Replies on first addon activation (one-time, non-renewable) — enough to test ~25 AI-drafted replies
+- Allotment resets on **workspace billing date** each month — no rollover
+- Top-up increments renew annually alongside main subscription
+- Plan downgrade: allotment recalculated from new plan's account count at next reset
+- Account removal (Agency Unlimited): allotment recalculated at next billing cycle
+- Unlock cancellation: active AI rules pause immediately; rule data retained 90 days
+- **Free trial:** 50 AI Inbox Replies on first unlock activation (one-time, non-renewable) — enough to test ~50 AI-drafted replies
 
 ---
 
 ## Rollout Checklist
 
-- [ ] Addon upsell shown only on Advanced and Agency plan settings — not visible to Standard users
-- [ ] Agency Unlimited per-account bonus (+10/account) computed from active connected accounts, updated daily
-- [ ] Enterprise: custom AI reply ceiling negotiated per contract
-- [ ] Top-up packs available from workspace billing page and from the inline "AI Replies exhausted" banner
-- [ ] First-time activation: 25 free AI Replies (one-time, non-renewable)
-- [ ] Usage counter visible in Inbox sidebar and Auto-Replies settings: *"218 / 300 AI Replies used this month"*
+- [ ] Unlock only visible on Advanced and Agency Unlimited plan billing — hidden from Standard users
+- [ ] Base allotment calculated from connected social account count at unlock time
+- [ ] Agency Unlimited per-account scaling recalculates on account add/remove (effective next billing cycle)
+- [ ] Top-up increments available from billing page and from inline "AI Inbox Replies exhausted" banner
+- [ ] Usage counter in Inbox sidebar and Auto-Replies settings: *"143 / 200 AI Inbox Replies used this month"*
+- [ ] Free trial: 50 AI Inbox Replies on first activation (one-time, non-renewable)
+- [ ] Enterprise: custom allotment negotiated per contract
 
 ---
 
 ## Summary
 
-| | Advanced | Agency | Agency Unlimited (100 accts) |
-|-|----------|--------|------------------------------|
-| Addon price | $19/mo | $19/mo | $19/mo |
-| Included AI Replies/mo | 300 | 750 | 3,500 |
-| Est. AI replies/mo at full use | ~300 | ~750 | ~3,500 |
-| Top-up (smallest pack) | $7/250 replies | $7/250 replies | $7/250 replies |
+| | Advanced | Agency Unlimited (base) | Agency Unlimited (100 accts) |
+|-|----------|------------------------|------------------------------|
+| Plan price | $49/mo | $99/mo | $99/mo+ |
+| Unlock fee | $19/mo | $19/mo | $19/mo |
+| Formula | 10 accts × 20 | 25 accts × 20 | 100 accts × 20 |
+| AI Inbox Replies/mo | **200** | **500** | **2,000** |
+| Top-up increment | 100 replies / $5/mo | 100 replies / $5/mo | 100 replies / $5/mo |
