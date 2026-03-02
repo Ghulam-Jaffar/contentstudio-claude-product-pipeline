@@ -68,7 +68,9 @@
       "Bash(do:*)",
       "Bash(npx tsc:*)",
       "Bash(npm run:*)",
-      "Bash(wc:*)"
+      "Bash(wc:*)",
+      "Bash(/home/casper/code/contentstudio-claude-product-pipeline/tmp-be-payload.json:*)",
+      "Bash(/home/casper/code/contentstudio-claude-product-pipeline/tmp-fe-payload.json:*)"
     ]
   }
 }
