@@ -64,7 +64,11 @@
       "WebFetch(domain:www.desk365.io)",
       "WebFetch(domain:socialrails.com)",
       "WebFetch(domain:www.amio.io)",
-      "WebFetch(domain:www.freshworks.com)"
+      "WebFetch(domain:www.freshworks.com)",
+      "Bash(do:*)",
+      "Bash(npx tsc:*)",
+      "Bash(npm run:*)",
+      "Bash(wc:*)"
     ]
   }
 }
