@@ -171,6 +171,34 @@ The Analytics tab has two sub-tabs: **Performance** and **Insights**.
 #### AI Insights on Every Widget
 Every chart and table widget has a violet Sparkles (✨) ActionIcon button in its header. Clicking it opens a Mantine Popover showing 2–3 AI-generated insight bullets specific to that widget's data. The button is visible in both interactive and static (report preview) modes.
 
+#### Metric Data Availability Indicators (P0)
+Not every platform exposes every metric. Reach is estimated from domain traffic for web/blog sources. Impressions are unavailable on LinkedIn, Reddit, Bluesky, Threads, and all web sources. Engagement is unavailable for web/blog/news/forums.
+
+The UI surfaces this transparently in three places:
+
+**KPI card tooltips** — hovering the info (ℹ) icon on Reach, Engagement, or Impressions shows a platform legend grouped into three sections:
+- *Included sources* — colored dot + platform label (full data)
+- *Estimated (domain traffic)* — outline dot + `~platform` label (web sources for Reach)
+- *Not available* — dimmed dot + label (e.g. LinkedIn/Reddit/web for Impressions)
+
+**Chart info tooltips** — the Reach, Engagement, and Impressions charts show the same platform legend when the chart's info icon is hovered.
+
+**Network Breakdown Table** — individual cells show platform-specific availability:
+- `—` (dimmed, 35% opacity) for unavailable metrics on a given platform (e.g. Impressions for LinkedIn row)
+- `~value` with dotted underline for estimated values (e.g. Reach for News Sites row) — hover shows "Estimated from domain traffic data"
+- Column totals exclude unavailable rows; totals that include estimated values are prefixed with `~`
+- Column headers for Reach, Engagement, and Impressions each have their own info icon opening the platform legend
+
+**Platform availability matrix:**
+
+| Platform | Reach | Engagement | Impressions |
+|---|---|---|---|
+| X/Twitter, Instagram, Facebook, TikTok, YouTube, Pinterest | full | full | full |
+| LinkedIn | full | full | **unavailable** |
+| Reddit | **estimated** | full | **unavailable** |
+| Bluesky, Threads | full | full | **unavailable** |
+| News, Blogs, Forums, Reviews, Podcasts | **estimated** | **unavailable** | **unavailable** |
+
 ### 8.6 Spike Alerts (P0)
 
 - Per-topic threshold: 25% / 50% / 100% / custom % above 7-day rolling average
@@ -368,3 +396,4 @@ Spec: `docs/features/social-listening/04-spec.md`
 |---|---|---|
 | 2026-02-23 | Product Team | Initial draft via ContentStudio Claude pipeline |
 | 2026-03-02 | Product Team | Updated: pricing ($99/mo, $79/mo annual), user states (trial/locked/unlocked/expired), AI Insights on every widget, Report Preview Drawer, Reports tab sub-tabs, export modal 3-tab structure, settings keyword editor, prototype reference added, sections restructured to 15 |
+| 2026-03-03 | Product Team | Added: metric data availability indicators — platform support grid in KPI tooltips, chart tooltips, and NetworkBreakdownTable cells (unavailable = —, estimated = ~value) |
